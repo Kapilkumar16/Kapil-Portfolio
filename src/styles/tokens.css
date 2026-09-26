@@ -1,0 +1,56 @@
+:root {
+  /* Surface */
+  --canvas: #000000;
+  --surface-soft: #0d0d0d;
+  --surface-card: #1a1a1a;
+  --surface-elevated: #262626;
+  --carbon-gray: #2b2b2b;
+
+  /* Hairlines */
+  --hairline: #3c3c3c;
+  --hairline-strong: #262626;
+
+  /* Text */
+  --on-dark: #ffffff;
+  --body: #bbbbbb;
+  --body-strong: #e6e6e6;
+  --muted: #7e7e7e;
+
+  /* Brand — identity only, never an action colour */
+  --m-blue-light: #0066b1;
+  --m-blue-dark: #1c69d4;
+  --m-red: #e22718;
+
+  /* Semantic */
+  --warning: #f4b400;
+  --success: #0fa336;
+
+  /* Type */
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --display-tracking: -0.5px;
+  --label-tracking: 1.5px;
+
+  /* Spacing — 4px base */
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 40px;
+  --space-xxl: 64px;
+  --space-section: 96px;
+
+  /* Layout */
+  --max-width: 1440px;
+  --gutter: clamp(16px, 4.4vw, 64px);
+  --nav-height: 64px;
+
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --space-section: 64px;
+    --space-xxl: 40px;
+  }
+}

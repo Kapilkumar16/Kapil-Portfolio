@@ -1,0 +1,155 @@
+.stack {
+  border-top: 1px solid var(--hairline-strong);
+}
+.stack__layout {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space-lg);
+}
+.stack__main {
+  grid-column: 1 / span 8;
+  min-width: 0;
+}
+
+/* ---------- Category tabs ---------- */
+
+.tabs {
+  display: flex;
+  gap: var(--space-lg);
+  overflow-x: auto;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--hairline);
+  margin-bottom: var(--space-xl);
+}
+.tabs::-webkit-scrollbar {
+  display: none;
+}
+.tab {
+  position: relative;
+  flex: none;
+  padding: var(--space-sm) 0 var(--space-md);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--body);
+  transition: color 200ms var(--ease);
+}
+.tab::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: transparent;
+}
+.tab:hover {
+  color: var(--on-dark);
+}
+.tab:hover:not(.is-active)::after {
+  background: linear-gradient(
+    to right,
+    var(--m-blue-light) 0 33.33%,
+    var(--m-blue-dark) 33.33% 66.66%,
+    var(--m-red) 66.66% 100%
+  );
+}
+.tab.is-active {
+  color: var(--on-dark);
+}
+.tab.is-active::after {
+  background: var(--on-dark);
+}
+.tab:focus-visible {
+  outline-offset: -2px;
+}
+
+/* ---------- Skills ---------- */
+
+@keyframes skill-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-lg);
+}
+.skill {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxs);
+  padding-block: var(--space-md);
+  border-bottom: 1px solid var(--hairline-strong);
+  animation: skill-in 400ms var(--ease) both;
+}
+.skill:nth-child(2) {
+  animation-delay: 40ms;
+}
+.skill:nth-child(3) {
+  animation-delay: 80ms;
+}
+.skill:nth-child(4) {
+  animation-delay: 120ms;
+}
+.skill:nth-child(5) {
+  animation-delay: 160ms;
+}
+.skill:nth-child(6) {
+  animation-delay: 200ms;
+}
+.skill__name {
+  color: var(--on-dark);
+  font-size: 18px;
+  font-weight: 700;
+}
+.skill__where {
+  color: var(--muted);
+}
+
+/* ---------- Résumé card ---------- */
+
+.resume-card {
+  grid-column: 10 / span 3;
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-height) + var(--space-xl));
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--surface-card);
+  scroll-margin-top: calc(var(--nav-height) + var(--space-lg));
+}
+.resume-card__file {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--hairline);
+}
+.resume-card__btn {
+  width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .stack__main,
+  .resume-card {
+    grid-column: 1 / -1;
+  }
+  .resume-card {
+    position: static;
+    margin-top: var(--space-xl);
+  }
+}
+@media (max-width: 767px) {
+  .skill-grid {
+    grid-template-columns: 1fr;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .skill {
+    animation: none;
+  }
+}

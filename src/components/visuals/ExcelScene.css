@@ -1,0 +1,226 @@
+.xscene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  -webkit-mask-image: radial-gradient(ellipse 64% 82% at 66% 40%, #000 48%, transparent 100%);
+  mask-image: radial-gradient(ellipse 64% 82% at 66% 40%, #000 48%, transparent 100%);
+}
+
+/* ---------- The sheet, laid on the floor ---------- */
+
+.xscene__floor {
+  position: absolute;
+  top: 18%;
+  left: 18%;
+  width: 1600px;
+  transform: perspective(1100px) rotateX(58deg) rotateZ(-10deg);
+  transform-origin: 50% 0;
+}
+.xscene__sheet {
+  width: 100%;
+  height: auto;
+  font-family: var(--font);
+}
+.xscene__sheet text {
+  fill: #7e7e7e;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+.xscene__sheet text.is-hot {
+  fill: #fff;
+}
+
+/* ---------- The chat panel ---------- */
+
+.xscene__panel {
+  position: absolute;
+  top: 7%;
+  left: 50%;
+  width: 580px;
+  padding: 28px;
+  background: var(--surface-soft);
+  border: 1px solid var(--hairline);
+  color: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  transform: perspective(1800px) rotateY(-14deg) rotateX(6deg) rotateZ(-1deg);
+  transform-origin: 20% 30%;
+}
+
+.xscene__head {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--hairline);
+}
+.xscene__tab {
+  position: relative;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: var(--label-tracking);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.xscene__tab.is-active {
+  color: var(--on-dark);
+}
+.xscene__tab.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -16px;
+  height: 2px;
+  background: var(--on-dark);
+}
+.xscene__file {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.xscene__question {
+  margin-top: 18px;
+  padding: 10px 14px;
+  background: var(--surface-card);
+  color: var(--on-dark);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.xscene__stages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+.xscene__stages span {
+  padding: 3px 8px;
+  border: 1px solid var(--hairline);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.xscene__stages .is-ok {
+  border-color: var(--success);
+  color: var(--success);
+}
+
+.xscene__sql {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  background: var(--canvas);
+  border: 1px solid var(--hairline-strong);
+  font-family: ui-monospace, 'Cascadia Code', Consolas, monospace;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--body-strong);
+  white-space: pre;
+  overflow: hidden;
+}
+.xscene__sql b {
+  font-weight: 400;
+  color: var(--muted);
+}
+.xscene__sql mark {
+  background: transparent;
+  color: var(--on-dark);
+  box-shadow: inset 0 -2px 0 var(--on-dark);
+}
+.xscene__bound {
+  margin-top: 6px;
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.xscene__chart {
+  display: grid;
+  gap: 6px;
+  margin-top: 16px;
+}
+.xscene__bar {
+  display: grid;
+  grid-template-columns: 96px 1fr 56px;
+  align-items: center;
+  gap: 12px;
+  font-size: 12px;
+}
+.xscene__track {
+  height: 8px;
+  background: var(--surface-card);
+}
+.xscene__track span {
+  display: block;
+  height: 100%;
+  background: var(--body-strong);
+}
+.xscene__bar:first-child .xscene__track span {
+  background: var(--on-dark);
+}
+.xscene__delta {
+  text-align: right;
+  color: var(--on-dark);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.xscene__answer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline-strong);
+  color: var(--body-strong);
+  font-size: 15px;
+}
+.xscene__cursor {
+  display: inline-block;
+  width: 8px;
+  height: 15px;
+  margin-left: 3px;
+  vertical-align: -2px;
+  background: var(--on-dark);
+  animation: xscene-blink 1.1s steps(1) infinite;
+}
+@keyframes xscene-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1279px) {
+  .xscene__panel {
+    left: 42%;
+    scale: 0.88;
+  }
+}
+@media (max-width: 1023px) {
+  .xscene__panel {
+    left: 26%;
+    scale: 0.78;
+  }
+}
+@media (max-width: 767px) {
+  .xscene {
+    -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 45%, #000 55%, transparent 100%);
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 45%, #000 55%, transparent 100%);
+  }
+  .xscene__floor {
+    left: -30%;
+    top: 30%;
+  }
+  .xscene__panel {
+    top: 4%;
+    left: 50%;
+    translate: -48% 0;
+    scale: 0.54;
+    transform-origin: 50% 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .xscene__cursor {
+    animation: none;
+  }
+}
