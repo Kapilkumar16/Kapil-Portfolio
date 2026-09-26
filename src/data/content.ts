@@ -401,10 +401,9 @@ export const stack: { id: string; label: string; skills: Skill[] }[] = [
 ]
 
 export const resume = {
-  label: 'Kapil Kumar Resume',
-  href: '/resume/Kapil-Kumar-Resume.pdf',
+  href: '/resume/kapil_kumar_resume.pdf',
   // Name the file gets when saved.
-  filename: 'Kapil Kumar Resume.pdf',
+  filename: 'kapil_kumar_resume.pdf',
 }
 
 export const contact = {

@@ -19,7 +19,7 @@ All the copy lives in [`src/data/content.ts`](src/data/content.ts): hero text, n
 projects, experience, the stack tabs, résumé links and contact details. Components only
 handle layout.
 
-The résumé is `public/resume/Kapil-Kumar-Resume.pdf` and downloads as "Kapil Kumar Resume.pdf".
+The résumé is `public/resume/kapil_kumar_resume.pdf` and downloads under the same name.
 To update it, replace that file and keep the name.
 
 ## Where things are
