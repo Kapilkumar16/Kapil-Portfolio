@@ -108,7 +108,7 @@
 
 .spec-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--cols, 4), minmax(0, 1fr));
   gap: 1px;
   background: var(--hairline-strong);
   border: 1px solid var(--hairline-strong);
@@ -121,6 +121,9 @@
   padding: var(--space-xl) var(--space-lg);
   background: var(--surface-soft);
   margin: 0;
+}
+.spec-cell:last-child {
+  grid-column: span var(--last-span, 1);
 }
 .spec-cell dd {
   margin: 0;
@@ -142,6 +145,9 @@
 @media (max-width: 1023px) {
   .spec-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .spec-cell:last-child {
+    grid-column: span var(--last-span-sm, 1);
   }
 }
 @media (max-width: 479px) {

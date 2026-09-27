@@ -70,11 +70,14 @@
 
 .notes-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
   gap: var(--space-lg);
 }
 .notes-grid li {
   display: flex;
+}
+.notes-grid li:last-child {
+  grid-column: span var(--last-span, 1);
 }
 .note-card {
   display: flex;
@@ -112,6 +115,9 @@
   .notes-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+  .notes-grid li:last-child {
+    grid-column: span var(--last-span-sm, 1);
+  }
 }
 
 @media (max-width: 767px) {
@@ -120,5 +126,8 @@
   }
   .notes-grid {
     grid-template-columns: 1fr;
+  }
+  .notes-grid li:last-child {
+    grid-column: auto;
   }
 }

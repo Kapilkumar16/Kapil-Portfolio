@@ -1,4 +1,4 @@
-import type { AnchorHTMLAttributes, ReactNode } from 'react'
+import type { AnchorHTMLAttributes, CSSProperties, ReactNode } from 'react'
 import type { Spec } from '../data/content'
 import { useReveal } from '../hooks/useReveal'
 import './ui.css'
@@ -42,9 +42,23 @@ export function TextLink({ children, icon = 'arrow', className = '', ...rest }: 
   )
 }
 
+/**
+ * Column count and last-item span for a grid of `count` items, so a short last
+ * row stretches to fill instead of leaving an empty cell. `cols` is the desktop
+ * column count; tablet and phone layouts use two columns.
+ */
+export function gridFill(count: number, cols: number): CSSProperties {
+  const span = (c: number) => (count % c ? c - (count % c) + 1 : 1)
+  return {
+    '--cols': cols,
+    '--last-span': span(cols),
+    '--last-span-sm': span(2),
+  } as CSSProperties
+}
+
 export function SpecGrid({ specs, variant = 'default' }: { specs: Spec[]; variant?: 'default' | 'compact' }) {
   return (
-    <dl className={`spec-grid spec-grid--${variant}`}>
+    <dl className={`spec-grid spec-grid--${variant}`} style={gridFill(specs.length, Math.min(specs.length, 4))}>
       {specs.map((spec) => (
         <div className="spec-cell" key={spec.label}>
           <dt className="label spec-cell__label">{spec.label}</dt>

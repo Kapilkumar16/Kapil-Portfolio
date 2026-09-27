@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react'
 import type { Featured } from '../data/content'
-import { Button, MStripe, Reveal, SpecGrid } from './ui'
+import { Button, MStripe, Reveal, SpecGrid, gridFill } from './ui'
 import './FeaturedProject.css'
 
 type Props = {
@@ -63,7 +63,7 @@ export function FeaturedProject({ project, figure, visual }: Props) {
           <h3 className="display-md">Under the hood.</h3>
           <p className="body-sm">{project.notesLead}</p>
         </Reveal>
-        <ul className="notes-grid">
+        <ul className="notes-grid" style={gridFill(project.notes.length, 3)}>
           {project.notes.map((note) => (
             <li key={note.title}>
               <Reveal className="note-card">

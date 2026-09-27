@@ -44,7 +44,6 @@ export const numbers: { title: string; lead: string; specs: Spec[] } = {
     { value: '~50×', label: 'Faster parse', note: 'ExcelMind ingestion' },
     { value: '<100 ms', label: 'Query latency', note: 'Multi-million-row sheets' },
     { value: '98%', label: 'NL → SQL accuracy', note: 'ExcelMind eval, 51 of 52' },
-    { value: '623', label: 'Tests', note: 'ApplyPilot backend' },
     { value: '9', label: 'ATS connectors', note: 'Keyless, incl. Workday' },
   ],
 }
@@ -69,24 +68,24 @@ export const applypilot: Featured = {
   eyebrow: 'Featured project · 2026',
   title: 'ApplyPilot.',
   lead:
-    'A human-in-the-loop job-application copilot: free-source job discovery, an Overleaf-style résumé editor with JD-driven tailoring, and a compatibility report that measures the PDF instead of guessing at it.',
-  status: 'W1–W7 shipped, plus a LaTeX engine. Browser extension is the remaining phase.',
+    'ApplyPilot helps with job applications from start to finish. It collects openings from company job boards, gives you a résumé editor in the browser that works like Overleaf, and suggests edits to fit a specific job description. Nothing changes until you approve it.',
+  status: 'Most of the plan is built and live, including LaTeX support. A browser extension is still to come.',
   caption: 'Illustration of the tailor view. Figures shown are examples.',
   claims: [
     {
-      title: 'The analyzer measures.',
+      title: 'It checks the real PDF.',
       body:
-        'It compiles your PDF, reads it back with two independent parsers, and labels every finding measured, estimated or not measurable. "Will an ATS rank me?" is reported as not measurable — because no system exposes that.',
+        "Most résumé tools give you an ATS score without saying where it came from. ApplyPilot compiles your PDF and reads the text back with two different parsers, then shows what each one picked up. Every result is marked measured, estimated or not measurable. ATS ranking is marked not measurable, because no ATS shares that.",
     },
     {
-      title: 'Tailoring cannot invent.',
+      title: "It won't make things up.",
       body:
-        'Every rewritten bullet is checked against its evidence. A number, tool, employer or scope the résumé does not support is flagged and blocked from export. The check is deterministic, whether a rule or a model wrote the sentence.',
+        "When a bullet is rewritten for a job, ApplyPilot compares it with what your résumé already says. If the new version adds a number, tool or employer you can't back up, it gets flagged and can't be exported until you edit or accept it. The check is rule-based, so it works the same whether a template or an LLM wrote the line.",
     },
     {
-      title: 'Scores show their work.',
+      title: 'Scores you can explain.',
       body:
-        'A match is a vector of eight weighted dimensions you can move — not a percentage with no derivation. Every row in the daily feed says why it ranked there and what it is missing.',
+        "A match isn't one percentage. It's split into eight parts, such as required skills, location and seniority, and you can change how much each one counts. Every job in the daily feed shows why it ranked where it did and what it's missing.",
     },
   ],
   specs: [
@@ -95,7 +94,7 @@ export const applypilot: Featured = {
     { value: '43', label: 'Verified boards' },
     { value: '8', label: 'Match dimensions' },
   ],
-  notesLead: 'Six engineering decisions, in brief.',
+  notesLead: 'Five engineering decisions, in brief.',
   notes: [
     {
       tag: 'Discovery',
@@ -127,12 +126,6 @@ export const applypilot: Featured = {
       body:
         'Their terms forbid it. Jobs come from public ATS feeds, JSON-LD career sites with robots.txt honoured, and licensed aggregator APIs.',
     },
-    {
-      tag: 'Matching',
-      title: 'A location filter that knows Indiana is not India.',
-      body:
-        'A hard filter, not a ranking nudge, with a gazetteer that refuses substring matches. Unparseable locations and bare "Remote" are kept; "Remote — US" is dropped unless you opt in.',
-    },
   ],
   stack: [
     'FastAPI',
@@ -156,31 +149,30 @@ export const excelmind: Featured = {
   eyebrow: 'Featured project · 2025',
   title: 'ExcelMind.',
   lead:
-    'Upload a spreadsheet of up to 200 MB, have it parsed in seconds, then browse, filter, chart and chat with millions of rows — served from Parquet and in-process DuckDB, never from a database scan.',
-  status: 'Live: FastAPI backend and workers on an Azure VM, React + TypeScript frontend on Vercel.',
+    'ExcelMind makes large spreadsheets usable in the browser. You upload a file of up to 200 MB, it is ready in a few seconds, and then you can scroll, filter, chart or ask questions about millions of rows without waiting.',
+  status: 'The backend and workers run on an Azure VM. The React frontend is hosted on Vercel.',
   caption: 'Illustration of the chat view over a sheet. Figures shown are examples.',
   claims: [
     {
-      title: 'The API never sees the bytes.',
+      title: 'Uploads skip the API.',
       body:
-        'The browser sends 10 MB chunks straight to Azure Blob on SAS-signed URLs. An Arq worker parses the workbook with python-calamine via Polars — about 50× faster than openpyxl — writes one Parquet per sheet, and streams progress back over SSE.',
+        "The browser uploads the file in 10 MB chunks straight to Azure Blob Storage using signed URLs, so the API server never handles the file itself. A background worker then reads the workbook with python-calamine and Polars, about 50 times faster than openpyxl, saves each sheet as a Parquet file, and reports progress to the browser over SSE.",
     },
     {
-      title: 'Millions of rows, sub-100 ms.',
+      title: 'Fast on millions of rows.',
       body:
-        'Postgres holds only metadata; rows live in Parquet. DuckDB turns each sort, filter and page into parameterized SQL and uses Parquet column statistics to skip row groups it does not need.',
+        "Postgres only stores details about each file. The rows themselves stay in Parquet, and DuckDB queries them directly. Every sort, filter and page request becomes a parameterised SQL query, and because Parquet keeps statistics for each column, DuckDB can skip the parts it doesn't need. Pages come back in under 100 ms.",
     },
     {
-      title: 'The model can only read your sheet.',
+      title: 'Chat can only read your sheet.',
       body:
-        'Chat SQL is written against one logical table. A sqlglot allowlist re-validates it and the backend binds the FROM target itself, so even a prompt-injected model can only SELECT over the caller’s own sheet.',
+        "When you ask a question, the model writes SQL against a single table called data. Before it runs, sqlglot checks that it's a plain SELECT, and the backend decides which file it reads. So even if someone tricks the model with a clever prompt, the most it can do is read the sheet that user already has.",
     },
   ],
   specs: [
     { value: '200 MB', label: 'Max upload' },
     { value: '~50×', label: 'Faster parse' },
     { value: '<100 ms', label: 'Page fetches' },
-    { value: '6 / 6', label: 'Injections blocked' },
   ],
   notesLead: 'Six engineering decisions, in brief.',
   notes: [
